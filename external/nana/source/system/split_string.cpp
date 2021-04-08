@@ -1,7 +1,9 @@
 #include "split_string.hpp"
-#include <string>
 #include <algorithm>
+#include <ciso646>
 #include <cstddef>
+#include <string>
+
 
 namespace nana
 {

@@ -1,7 +1,11 @@
 language: cpp
-# addons:
-#   apt:
-#     packages:
+addons:
+  apt:
+    packages:
+      - libx11-dev
+      - libxft-dev
+      - libxcursor-dev
+
 #       - g++-10
 #       - clang-11
 #   homebrew:

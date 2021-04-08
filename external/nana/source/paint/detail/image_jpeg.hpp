@@ -28,7 +28,7 @@ namespace nana
 
 			void _m_read_jpg(jpeg_decompress_struct& jdstru)
 			{
-				::jpeg_read_header(&jdstru, true);	//Reject a tables-only JPEG file as an error
+				::jpeg_read_header(&jdstru, TRUE);	//Reject a tables-only JPEG file as an error
 
 				::jpeg_start_decompress(&jdstru);
 
