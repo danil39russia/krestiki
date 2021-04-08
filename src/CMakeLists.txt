@@ -8,4 +8,6 @@ doctest_discover_tests(proj_test)
 # ^ Прочитать из proj_test список тестов
 
 add_executable(proj main.cpp lib.cpp)
-target_link_libraries(proj PUBLIC default CONAN_PKG::fmt)
+target_link_libraries(proj PUBLIC default CONAN_PKG::fmt nana::nana CONAN_PKG::libjpeg CONAN_PKG::libpng)
+add_executable(calc calc.cpp)
+target_link_libraries(calc PUBLIC default CONAN_PKG::fmt nana::nana CONAN_PKG::libjpeg CONAN_PKG::libpng)

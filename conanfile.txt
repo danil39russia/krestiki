@@ -1,5 +1,7 @@
 [requires]
 fmt/7.1.2
+libjpeg/9d
+libpng/1.6.37
 
 [generators]
 cmake
