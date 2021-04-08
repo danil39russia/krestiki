@@ -27,6 +27,7 @@
 	#include <spawn.h>
 	#include <cstring>
 	#include <memory>
+	#include <cerrno>
 
 static void posix_open_url(const char *url_utf8)
 {

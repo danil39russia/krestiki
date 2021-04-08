@@ -27,6 +27,7 @@ conan_cmake_run(
   BASIC_SETUP CMAKE_TARGETS BUILD missing
   ENV CONAN_CMAKE_PROGRAM="${CMAKE_COMMAND}" ${ENV}
   )
+set(MSVC_USE_STATIC_RUNTIME OFF CACHE INTERNAL "Set to ON to build nana with the /MT(d) option.")
 
 enable_testing()
 add_subdirectory(external/doctest)
