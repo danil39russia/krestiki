@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\krestiki.dir/objects.a
+C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\ar.exe cr CMakeFiles\krestiki.dir/objects.a @CMakeFiles\krestiki.dir\objects1.rsp
+C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\krestiki.dir/objects.a -Wl,--no-whole-archive  -o krestiki.exe -Wl,--out-implib,libkrestiki.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\krestiki.dir\linklibs.rsp

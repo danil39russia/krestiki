@@ -1,0 +1,3 @@
+C:/Users/bazhe/CLionProjects/krestiki/cmake-build-debug/CMakeFiles/krestiki.dir
+C:/Users/bazhe/CLionProjects/krestiki/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/bazhe/CLionProjects/krestiki/cmake-build-debug/CMakeFiles/rebuild_cache.dir
