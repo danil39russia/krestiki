@@ -7,11 +7,15 @@
 #include <string>
 //Подключили библиотеки
 
+/*
+функция, проверяющая возможную выигрышную комбинацию
 
+Если конмбинация выигрыщная, то заканчивает игру и подсвечитвает выигрыш красным
+*/
 void fn(std::string (&battlefield)[9], bool &game_run, nana::button (&button_all)[9]){
     using namespace nana;
-
-    if ((battlefield[0] == battlefield[1]) & (battlefield[1] == battlefield[2]) & battlefield[2] != "") {
+    
+    if ((battlefield[0] == battlefield[1]) && (battlefield[1] == battlefield[2]) && battlefield[2] != "") {
             game_run = false;
             button_all[0].bgcolor(color_rgb(0xDC143C));
             button_all[1].bgcolor(color_rgb(0xDC143C));
@@ -61,6 +65,11 @@ void fn(std::string (&battlefield)[9], bool &game_run, nana::button (&button_all
         }
 }
 
+/*
+функция отчиски
+
+стирает все кнопки и перезапускает игру
+*/
 void clear(nana::button (&button_all)[9]){
     using namespace nana;
 
