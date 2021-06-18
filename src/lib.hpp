@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
-extern int not_random();
-extern int check_battlefield(int a, int b, int c);
+
+extern int fn_test(std::string (&battlefield_test)[9]);

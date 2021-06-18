@@ -1,14 +1,51 @@
 #include "catch.hpp"
 #include "lib.hpp"
+#include <string>
 
-TEST_CASE("Something works") { REQUIRE(not_random() == not_random()); }
-TEST_CASE("1") { REQUIRE(check_battlefield(0, 1, 1) == false); }
-TEST_CASE("2") { REQUIRE(check_battlefield(0, 1, 0) == false); }
-TEST_CASE("3") { REQUIRE(check_battlefield(0, 0, 1) == false); }
-TEST_CASE("4") { REQUIRE(check_battlefield(1, 1, 1) == true); }
-TEST_CASE("5") { REQUIRE(check_battlefield(4, 4, 4) == true); }
-TEST_CASE("6") { REQUIRE(check_battlefield(5, 5, 0) == false); }
-TEST_CASE("7") { REQUIRE(check_battlefield(5, 5, 5) == true); }
-TEST_CASE("8") { REQUIRE(check_battlefield(50, 5, 1) == false); }
-TEST_CASE("9") { REQUIRE(check_battlefield(8, 3, 1) == false); }
-TEST_CASE("10") { REQUIRE(check_battlefield(0, 0, 9) == false); }
+TEST_CASE("Nothing") { 
+    std::string battlefield_test[9] = {
+        "", "", "", 
+        "", "", "", 
+        "", "", "",
+    };
+    REQUIRE(fn_test(battlefield_test) == true); }
+    
+TEST_CASE("Win line") { 
+    std::string battlefield_test[9] = {
+        "X", "X", "X", 
+        "", "", "", 
+        "", "", "",
+    };
+    REQUIRE(fn_test(battlefield_test) == false); }
+    
+TEST_CASE("No win") {
+    std::string battlefield_test[9] = {
+        "X", "X", "O", 
+        "", "", "", 
+        "", "", "",
+    };
+    REQUIRE(fn_test(battlefield_test) == true); }
+    
+TEST_CASE("Win line 2") {
+    std::string battlefield_test[9] = {
+        "X", "", "", 
+        "O", "O", "O", 
+        "X", "X", "O",
+    };
+    REQUIRE(fn_test(battlefield_test) == false); }
+
+TEST_CASE("No diagonal") {
+    std::string battlefield_test[9] = {
+        "X", "X", "O", 
+        "", "O", "", 
+        "O", "", "",
+    };
+    REQUIRE(fn_test(battlefield_test) == false); }
+
+TEST_CASE("Win stolb") {
+    std::string battlefield_test[9] = {
+        "X", "O", "X", 
+        "", "O", "X", 
+        "", "O", "",
+    };
+    REQUIRE(fn_test(battlefield_test) == false); }
