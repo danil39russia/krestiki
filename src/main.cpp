@@ -2,132 +2,39 @@
 #include <nana/gui/widgets/button.hpp>
 #include <nana/gui/widgets/label.hpp>
 #include <string>
+#include "lib.hpp"
 //Подключили библиотеки
 
-/*
-функция, проверяющая возможную выигрышную комбинацию
+/** \brief "Тело" игры
+ *
+ * Создание окна и вывод в него всех кнопок
+ *
+ * @param pvp_mod - переменная отвечает на вопрос "Включен PVP мод?"
+ * @param player_turn - переменная отвечает на вопрос "Сейчас ходит игрок?"
+ * @param game_run - переменная указывает, идет ли еще игра
+ * @param btn_txt - содержит в себе знак, который поставится при следующем ходе
+ * @param button_all - содержит в себе все кнопки
+ * @param battlefield - содержит в себе значения полей
+ */
 
-Если конмбинация выигрышная, то заканчивает игру и подсвечитвает выигрыш красным
-*/
-void fn(std::string (&battlefield)[9], bool &game_run, nana::button (&button_all)[9]){
-//использование пространства имен "nana"
-    using namespace nana;
-//проверка первой строки
-    if ((battlefield[0] == battlefield[1]) && (battlefield[1] == battlefield[2]) && battlefield[2] != "") {
-//заверишить игру
-            game_run = false;
-//перекрасить выигрушную комбинацию в красный цвет
-            button_all[0].bgcolor(color_rgb(0xDC143C));
-            button_all[1].bgcolor(color_rgb(0xDC143C));
-            button_all[2].bgcolor(color_rgb(0xDC143C));
-        }
-//проверка второй строки
-        else if((battlefield[3] == battlefield[4]) && (battlefield[4] == battlefield[5]) && battlefield[5] != "") {
-            game_run = false;
-            button_all[3].bgcolor(color_rgb(0xDC143C));
-            button_all[4].bgcolor(color_rgb(0xDC143C));
-            button_all[5].bgcolor(color_rgb(0xDC143C));
-        }
-//проверка третьей строки
-        else if((battlefield[6] == battlefield[7]) && (battlefield[7] == battlefield[8]) && battlefield[8] != "") {
-            game_run = false;
-            button_all[6].bgcolor(color_rgb(0xDC143C));
-            button_all[7].bgcolor(color_rgb(0xDC143C));
-            button_all[8].bgcolor(color_rgb(0xDC143C));
-        }
-//проверка первого столбца
-        else if((battlefield[0] == battlefield[3]) && (battlefield[3] == battlefield[6]) && battlefield[6] != "") {
-            game_run = false;
-            button_all[0].bgcolor(color_rgb(0xDC143C));
-            button_all[3].bgcolor(color_rgb(0xDC143C));
-            button_all[6].bgcolor(color_rgb(0xDC143C));
-        }
-//проверка второго столбца
-        else if((battlefield[1] == battlefield[4]) && (battlefield[4] == battlefield[7]) && battlefield[7] != "") {
-            game_run = false;
-            button_all[1].bgcolor(color_rgb(0xDC143C));
-            button_all[4].bgcolor(color_rgb(0xDC143C));
-            button_all[7].bgcolor(color_rgb(0xDC143C));
-        }
-//проверка третьего столбца
-        else if((battlefield[2] == battlefield[5]) && (battlefield[5] == battlefield[8]) && battlefield[8] != "") {
-            game_run = false;
-            button_all[2].bgcolor(color_rgb(0xDC143C));
-            button_all[5].bgcolor(color_rgb(0xDC143C));
-            button_all[8].bgcolor(color_rgb(0xDC143C));
-        }
-//проверка диагоналей
-        else if((battlefield[0] == battlefield[4]) && (battlefield[4] == battlefield[8]) && battlefield[8] != "") {
-            game_run = false;
-            button_all[0].bgcolor(color_rgb(0xDC143C));
-            button_all[4].bgcolor(color_rgb(0xDC143C));
-            button_all[8].bgcolor(color_rgb(0xDC143C));
-        }
-        else if((battlefield[2] == battlefield[4]) && (battlefield[4] == battlefield[6]) && battlefield[6] != "") {
-            game_run = false;
-            button_all[2].bgcolor(color_rgb(0xDC143C));
-            button_all[4].bgcolor(color_rgb(0xDC143C));
-            button_all[6].bgcolor(color_rgb(0xDC143C));
-        }
-}
-
-/*
-функция отчиски
-
-стирает все кнопки и перезапускает игру
-*/
-void clear(nana::button (&button_all)[9]){
-    using namespace nana;
-//отчистка текста кнопок
-    button_all[0].caption("");
-    button_all[1].caption("");
-    button_all[2].caption("");
-    button_all[3].caption("");
-    button_all[4].caption("");
-    button_all[5].caption("");
-    button_all[6].caption("");
-    button_all[7].caption("");
-    button_all[8].caption("");
-//отчистка цвета кнопок
-    button_all[0].bgcolor(color_rgb(0xFFFFFF));
-    button_all[1].bgcolor(color_rgb(0xFFFFFF));
-    button_all[2].bgcolor(color_rgb(0xFFFFFF));
-    button_all[3].bgcolor(color_rgb(0xFFFFFF));
-    button_all[4].bgcolor(color_rgb(0xFFFFFF));
-    button_all[5].bgcolor(color_rgb(0xFFFFFF));
-    button_all[6].bgcolor(color_rgb(0xFFFFFF));
-    button_all[7].bgcolor(color_rgb(0xFFFFFF));
-    button_all[8].bgcolor(color_rgb(0xFFFFFF));
-}
-
-/*
-"Тело" игры
-*/
 int main() {
+    ///используем пространство имен nana
     using namespace nana;
     
-//указываем размер окна
+    ///указываем размер окна
     form fm(nana::rectangle(400, 100, 320, 390));
 
-//хранит в себе значения полей
+    ///объявляем переменные
     std::string battlefield[9] = {
         "", "", "", "", "", "", "", "", "",
     };
 
-/*
-Переменные
-*/
-
-//режим игры
     bool pvp_mod = false;
-//ход игрока
     bool player_turn = true;
-//статус игры
     bool game_run = true;
-//показывает, что ставить следующим
     std::string btn_txt = "X";
 
-//инициализация кнопок
+    /// создаем кнопки
     button button_all[9] = {
     button{fm},
     button{fm},
@@ -140,19 +47,19 @@ int main() {
     button{fm}
     };
 
-//button button_all[1]{fm};
-//настраиваем цвет кнопки
+    ///настраиваем цвет кнопки
     button_all[0].bgcolor(color_rgb(0xFFFFFF));
 
-//настраиваем шрифт кнопки
+    ///настраиваем шрифт кнопки
     button_all[0].typeface(nana::paint::font("", 40, true));
 
-//обработка нажатий кнопки
+    ///обработка нажатий кнопки
     button_all[0].events().click([&] {
-/*
-Проверяет, продолжается ли игра и пустая ли клетка
-Ставит крестик или нолик в зависимости от хода
-*/
+
+    /**
+    * Проверяет, продолжается ли игра и пустая ли клетка
+    * Ставит крестик или нолик в зависимости от хода
+    */
         if (battlefield[0] == "" && game_run == true) {
             battlefield[0] = btn_txt;
             button_all[0].caption(btn_txt);
@@ -162,10 +69,6 @@ int main() {
                 btn_txt = "X";
             player_turn = false;
         }
-/*
-Проверка всех условий выигрыша.
-Если есть выигрышная комбинация, то меняет цвет кнопок и завершает игру
-*/
         fn(battlefield, game_run, button_all);
     });
 
@@ -289,13 +192,13 @@ int main() {
         fn(battlefield, game_run, button_all);
     });
 
-//кнопка рестарта
+    ///кнопка рестарта
     button button_restart{fm};
     button_restart.bgcolor(color_rgb(0x696969));
     button_restart.typeface(nana::paint::font("", 15, true));
     button_restart.caption("Рестарт");
     button_restart.events().click([&] {
-//тут все кнопки очищаются, игра перезапускается
+    ///тут все кнопки очищаются, игра перезапускается
         for (int i = 0; i < 9; i++) {
             battlefield[i] = "";
         };
@@ -304,17 +207,17 @@ int main() {
         game_run = true;
     });
 
-//кнопка смены режима игры
+    ///кнопка смены режима игры
     button change_mod{fm};
     change_mod.bgcolor(color_rgb(0x696969));
     change_mod.typeface(nana::paint::font("", 15, true));
     change_mod.caption("vs PC");
     change_mod.events().click([&] {
-//если выключен pvp мод, то включаем его
+    ///если выключен pvp мод, то включаем его
         if (!pvp_mod) {
             change_mod.caption("PvP");
             pvp_mod = true;
-//если был включен pvp, то включаем режим против пк
+        ///если был включен pvp, то включаем режим против пк
         } else {
             change_mod.caption("vs PC");
             pvp_mod = false;
@@ -327,13 +230,13 @@ int main() {
         game_run = true;
     });
 
-//кнопка выхода
+    ///кнопка выхода
     button button_exit{fm, "Quit"};
     button_exit.bgcolor(color_rgb(0xDC143C));
     button_exit.typeface(nana::paint::font("", 15, true));
     button_exit.events().click([&fm] { fm.close(); });
 
-//Настройка расположений кнопок
+    ///Настройка расположений кнопок
     fm.div("vert <>"
            "<weight=5%>\n"
            "<<weight=5%>weight=25% text size=20 < button_line1><weight=5%>>"
@@ -347,16 +250,16 @@ int main() {
            "<>\n"
            "<weight=5%>");
 
-//определяем, какая кнопка в какой строке
+    ///определяем, какая кнопка в какой строке
     fm["button_line1"] << button_all[0] << button_all[1] << button_all[2];
     fm["button_line2"] << button_all[3] << button_all[4] << button_all[5];
     fm["button_line3"] << button_all[6] << button_all[7] << button_all[8];
     fm["button_line4"] << button_restart << button_exit; //<< change_mod;
     fm.collocate();
 
-// Show the form
+    /// Show the form
     fm.show();
 
-// Start to event loop process, it blocks until the form is closed.
+    /// Start to event loop process, it blocks until the form is closed.
     exec();
 }
