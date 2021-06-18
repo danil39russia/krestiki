@@ -106,27 +106,28 @@ void clear(nana::button (&button_all)[9]){
 int main() {
     using namespace nana;
     
-    //указываем размер окна
+//указываем размер окна
     form fm(nana::rectangle(400, 100, 320, 390));
 
-    //хранит в себе значения полей
+//хранит в себе значения полей
     std::string battlefield[9] = {
         "", "", "", "", "", "", "", "", "",
     };
-    /*
-    Переменные, где
 
-    pvp_mod - режим игры
-    player_turn - ход игрока?
-    game_run - статус игры
-    btn_txt - показывает, что ставить следующим
-    */
+/*
+Переменные
+*/
+
+//режим игры
     bool pvp_mod = false;
+//ход игрока
     bool player_turn = true;
+//статус игры
     bool game_run = true;
+//показывает, что ставить следующим
     std::string btn_txt = "X";
 
-    //инициализация кнопок
+//инициализация кнопок
     button button_all[9] = {
     button{fm},
     button{fm},
@@ -139,19 +140,19 @@ int main() {
     button{fm}
     };
 
-    //button button_all[1]{fm};
-    //настраиваем цвет кнопки
+//button button_all[1]{fm};
+//настраиваем цвет кнопки
     button_all[0].bgcolor(color_rgb(0xFFFFFF));
 
-    //настраиваем шрифт кнопки
+//настраиваем шрифт кнопки
     button_all[0].typeface(nana::paint::font("", 40, true));
 
-    //обработка нажатий кнопки
+//обработка нажатий кнопки
     button_all[0].events().click([&] {
-        /*
-        Проверяет, продолжается ли игра и пустая ли клетка
-        Ставит крестик или нолик в зависимости от хода
-        */
+/*
+Проверяет, продолжается ли игра и пустая ли клетка
+Ставит крестик или нолик в зависимости от хода
+*/
         if (battlefield[0] == "" && game_run == true) {
             battlefield[0] = btn_txt;
             button_all[0].caption(btn_txt);
@@ -161,10 +162,10 @@ int main() {
                 btn_txt = "X";
             player_turn = false;
         }
-        /*
-        Проверка всех условий выигрыша.
-        Если есть выигрышная комбинация, то меняет цвет кнопок и завершает игру
-        */
+/*
+Проверка всех условий выигрыша.
+Если есть выигрышная комбинация, то меняет цвет кнопок и завершает игру
+*/
         fn(battlefield, game_run, button_all);
     });
 
@@ -288,13 +289,13 @@ int main() {
         fn(battlefield, game_run, button_all);
     });
 
-    //кнопка рестарта
+//кнопка рестарта
     button button_restart{fm};
     button_restart.bgcolor(color_rgb(0x696969));
     button_restart.typeface(nana::paint::font("", 15, true));
     button_restart.caption("Рестарт");
     button_restart.events().click([&] {
-        //тут все кнопки очищаются, игра перезапускается
+//тут все кнопки очищаются, игра перезапускается
         for (int i = 0; i < 9; i++) {
             battlefield[i] = "";
         };
@@ -303,7 +304,7 @@ int main() {
         game_run = true;
     });
 
-    //кнопка смены режима игры
+//кнопка смены режима игры
     button change_mod{fm};
     change_mod.bgcolor(color_rgb(0x696969));
     change_mod.typeface(nana::paint::font("", 15, true));
@@ -326,13 +327,13 @@ int main() {
         game_run = true;
     });
 
-    //кнопка выхода
+//кнопка выхода
     button button_exit{fm, "Quit"};
     button_exit.bgcolor(color_rgb(0xDC143C));
     button_exit.typeface(nana::paint::font("", 15, true));
     button_exit.events().click([&fm] { fm.close(); });
 
-    //Настройка расположений кнопок
+//Настройка расположений кнопок
     fm.div("vert <>"
            "<weight=5%>\n"
            "<<weight=5%>weight=25% text size=20 < button_line1><weight=5%>>"
@@ -346,16 +347,16 @@ int main() {
            "<>\n"
            "<weight=5%>");
 
-    //определяем, какая кнопка в какой строке
+//определяем, какая кнопка в какой строке
     fm["button_line1"] << button_all[0] << button_all[1] << button_all[2];
     fm["button_line2"] << button_all[3] << button_all[4] << button_all[5];
     fm["button_line3"] << button_all[6] << button_all[7] << button_all[8];
     fm["button_line4"] << button_restart << button_exit; //<< change_mod;
     fm.collocate();
 
-    // Show the form
+// Show the form
     fm.show();
 
-    // Start to event loop process, it blocks until the form is closed.
+// Start to event loop process, it blocks until the form is closed.
     exec();
 }
