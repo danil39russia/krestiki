@@ -3,6 +3,7 @@
 #include <nana/gui.hpp>
 #include <nana/gui/widgets/button.hpp>
 #include <nana/gui/widgets/label.hpp>
+#include "lib.hpp"
 
 /** \brief Функция, проверяющая возможную выигрышную комбинацию
  * 
@@ -75,29 +76,36 @@ void fn(std::string (&battlefield)[9], bool &game_run, nana::button (&button_all
 }
 
 /** Функция отчиски
+ *
  * задает всем кнопкам пустой текст и возвращает фон не дефолтный
  * "стирает все кнопки и перезапускает игру"
  */
 void clear(nana::button (&button_all)[9]){
     using namespace nana;
-//отчистка текста кнопок
-    button_all[0].caption("");
-    button_all[1].caption("");
-    button_all[2].caption("");
-    button_all[3].caption("");
-    button_all[4].caption("");
-    button_all[5].caption("");
-    button_all[6].caption("");
-    button_all[7].caption("");
-    button_all[8].caption("");
-//отчистка цвета кнопок
-    button_all[0].bgcolor(color_rgb(0xFFFFFF));
-    button_all[1].bgcolor(color_rgb(0xFFFFFF));
-    button_all[2].bgcolor(color_rgb(0xFFFFFF));
-    button_all[3].bgcolor(color_rgb(0xFFFFFF));
-    button_all[4].bgcolor(color_rgb(0xFFFFFF));
-    button_all[5].bgcolor(color_rgb(0xFFFFFF));
-    button_all[6].bgcolor(color_rgb(0xFFFFFF));
-    button_all[7].bgcolor(color_rgb(0xFFFFFF));
-    button_all[8].bgcolor(color_rgb(0xFFFFFF));
+    ///отчистка текста кнопок
+    for (int i = 0; i < 9; i++){
+        button_all[i].caption("");
+    }
+    
+    ///отчистка цвета кнопок
+    for (int i = 0; i < 9; i++){
+            button_all[i].bgcolor(color_rgb(0xFFFFFF));
+        }
+}
+
+/** Функция отработки нажатия кнопки
+ *
+ * при нажатии кнопки проверяет, может ли быть сделан ход
+ * если ход можно сделать, что меняет текст кнопки и передает ход
+ */
+void btn_click(std::string (&battlefield)[9], int num, std::string &btn_txt, nana::button (&button_all)[9], bool &player_turn, bool &game_run){
+    if (battlefield[num] == "" && game_run == true) {
+            battlefield[num] = btn_txt;
+            button_all[num].caption(btn_txt);
+            if (btn_txt == "X")
+                btn_txt = "O";
+            else
+                btn_txt = "X";
+            player_turn = false;
+            }
 }
