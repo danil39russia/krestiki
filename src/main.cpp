@@ -53,6 +53,13 @@ int main() {
     ///настраиваем шрифт кнопки
     button_all[0].typeface(nana::paint::font("", 40, true));
 
+    ///настраиваем цвет и шрифт кнопок
+    for (int i = 0; i < 9; i++) {
+        button_all[i].bgcolor(color_rgb(0xFFFFFF));
+        button_all[i].typeface(nana::paint::font("", 40, true));
+    }
+    
+
     ///обработка нажатий кнопки
     button_all[0].events().click([&] {
 
@@ -60,135 +67,55 @@ int main() {
     * Проверяет, продолжается ли игра и пустая ли клетка
     * Ставит крестик или нолик в зависимости от хода
     */
-        if (battlefield[0] == "" && game_run == true) {
-            battlefield[0] = btn_txt;
-            button_all[0].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 0, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[1].bgcolor(color_rgb(0xFFFFFF));
-    button_all[1].typeface(nana::paint::font("", 40, true));
+    
     button_all[1].events().click([&] {
-        if (battlefield[1] == "" && game_run == true) {
-            battlefield[1] = btn_txt;
-            button_all[1].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 1, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[2].bgcolor(color_rgb(0xFFFFFF));
-    button_all[2].typeface(nana::paint::font("", 40, true));
+
     button_all[2].events().click([&] {
-        if (battlefield[2] == "" && game_run == true) {
-            battlefield[2] = btn_txt;
-            button_all[2].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 2, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[3].bgcolor(color_rgb(0xFFFFFF));
-    button_all[3].typeface(nana::paint::font("", 40, true));
+
     button_all[3].events().click([&] {
-        if (battlefield[3] == "" && game_run == true) {
-            battlefield[3] = btn_txt;
-            button_all[3].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 3, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[4].bgcolor(color_rgb(0xFFFFFF));
-    button_all[4].typeface(nana::paint::font("", 40, true));
+
     button_all[4].events().click([&] {
-        if (battlefield[4] == "" && game_run == true) {
-            battlefield[4] = btn_txt;
-            button_all[4].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 4, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[5].bgcolor(color_rgb(0xFFFFFF));
-    button_all[5].typeface(nana::paint::font("", 40, true));
+
     button_all[5].events().click([&] {
-        if (battlefield[5] == "" && game_run == true) {
-            battlefield[5] = btn_txt;
-            button_all[5].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 5, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[6].bgcolor(color_rgb(0xFFFFFF));
-    button_all[6].typeface(nana::paint::font("", 40, true));
+
     button_all[6].events().click([&] {
-        if (battlefield[6] == "" && game_run == true) {
-            battlefield[6] = btn_txt;
-            button_all[6].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 6, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[7].bgcolor(color_rgb(0xFFFFFF));
-    button_all[7].typeface(nana::paint::font("", 40, true));
+
     button_all[7].events().click([&] {
-        if (battlefield[7] == "" && game_run == true) {
-            battlefield[7] = btn_txt;
-            button_all[7].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 7, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
-    button_all[8].bgcolor(color_rgb(0xFFFFFF));
-    button_all[8].typeface(nana::paint::font("", 40, true));
+
     button_all[8].events().click([&] {
-        if (battlefield[8] == "" && game_run == true) {
-            battlefield[8] = btn_txt;
-            button_all[8].caption(btn_txt);
-            if (btn_txt == "X")
-                btn_txt = "O";
-            else
-                btn_txt = "X";
-            player_turn = false;
-        }
+        btn_click(battlefield, 8, btn_txt, button_all, player_turn, game_run);
         fn(battlefield, game_run, button_all);
     });
 
