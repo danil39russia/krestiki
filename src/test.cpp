@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "lib.cpp"
+#include "lib.hpp"
 #include <string>
 #include <nana/gui.hpp>
 #include <nana/gui/widgets/button.hpp>

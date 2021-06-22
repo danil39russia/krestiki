@@ -2,7 +2,7 @@
 #include <nana/gui/widgets/button.hpp>
 #include <nana/gui/widgets/label.hpp>
 #include <string>
-#include "lib.cpp"
+#include "lib.hpp"
 //Подключили библиотеки
 
 /** \brief "Тело" игры
